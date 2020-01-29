@@ -70,7 +70,7 @@ def dict_to_list_tuples(dict_items):
 						item = (k, value, i, True)
 						list_items.append(item)
 				else:
-					item = (k, value, i, True)
+					item = (k, value, v[value], True)
 					list_items.append(item)
 	return list_items
 
