@@ -7,7 +7,6 @@ import current_facts
 class TestCurrentFacts(unittest.TestCase):
 
     def test_shold_search_tuple_inside_list(self):
-        print(current_facts.facts[0][1])
         result = current_facts.search_tuple(current_facts.schema, current_facts.facts[0][1])
         self.assertEqual(result,('endereço', 'cardinality', 'one'))
     
@@ -39,12 +38,10 @@ class TestCurrentFacts(unittest.TestCase):
         dict_test = {}
         dict_test[item[0]] = {item[1]: item[2]}
         result = current_facts.dict_to_tuples(dict_test)
-        print(result)
         self.assertEqual(result, [('gabriel', 'endereço', 'av rio branco, 109', True)])
 
     def test_should_return_only_current_facts(self):
         result = current_facts.return_current_facts(current_facts.schema, current_facts.facts)
-        print(result)
         self.assertEqual(result, current_facts.expected_result)
 
 if __name__ == '__main__':

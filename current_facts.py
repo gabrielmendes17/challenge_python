@@ -40,18 +40,21 @@ def return_current_facts(schema, facts):
 		if item_is_valid(item):
 			if name_in_map(item, facts_map):
 				if is_card_one(item[1], schema):
-					print('Substituindo por '+item[1]+' mais atual!') 
+					print(f'{item[0]}: Atualizando {item[1]}!') 
 					facts_map[item[0]].update({ item[1]: item[2] })
 				else:
-					facts_map[item[0]].update({
-							item[1]: [facts_map[item[0]][item[1]], item[2]] 
-							if item_in_map(item, 1, facts_map)
-							else item[2]
-					})
-				print('Adicionando '+item[1])
+					if item[1] in facts_map[item[0]] and isinstance(facts_map[item[0]][item[1]], list):
+						facts_map[item[0]][item[1]].append(item[2])
+					else:
+						facts_map[item[0]].update({
+								item[1]: [facts_map[item[0]][item[1]], item[2]] 
+								if item_in_map(item, 1, facts_map)
+								else item[2]
+						})
+					print(f'{item[0]}: Adicionando {item[2]} a {item[1]}!')
 			else:
-					print('Criando '+item[1])   
-					facts_map[item[0]] = {item[1]: item[2]}
+				print(f'{item[0]}: Criando {item[1]} {item[2]}!')   
+				facts_map[item[0]] = {item[1]: item[2]}
 	return dict_to_tuples(facts_map)
 
 def dict_to_tuples(dict_items):
