@@ -37,7 +37,7 @@ class TestCurrentFacts(unittest.TestCase):
         item = current_facts.facts[0]
         dict_test = {}
         dict_test[item[0]] = {item[1]: item[2]}
-        result = current_facts.dict_to_tuples(dict_test)
+        result = current_facts.dict_to_list_tuples(dict_test)
         self.assertEqual(result, [('gabriel', 'endereço', 'av rio branco, 109', True)])
 
     def test_should_return_only_current_facts(self):

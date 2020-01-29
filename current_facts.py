@@ -2,14 +2,14 @@
 from __future__ import unicode_literals
 
 facts = [
-  ('gabriel', 'endereço', 'av rio branco, 109', True),
-  ('joão', 'endereço', 'rua alice, 10', True),
-  ('joão', 'endereço', 'rua bob, 88', True),
-  ('joão', 'telefone', '234-5678', True),
-  ('joão', 'telefone', '91234-5555', True),
-  ('joão', 'telefone', '234-5678', False),
-  ('gabriel', 'telefone', '98888-1111', True),
-  ('gabriel', 'telefone', '56789-1010', True),
+	('gabriel', 'endereço', 'av rio branco, 109', True),
+	('joão', 'endereço', 'rua alice, 10', True),
+	('joão', 'endereço', 'rua bob, 88', True),
+	('joão', 'telefone', '234-5678', True),
+	('joão', 'telefone', '91234-5555', True),
+	('joão', 'telefone', '234-5678', False),
+	('gabriel', 'telefone', '98888-1111', True),
+	('gabriel', 'telefone', '56789-1010', True),
 ]
 
 schema = [
@@ -47,33 +47,32 @@ def return_current_facts(schema, facts):
 						facts_map[item[0]][item[1]].append(item[2])
 					else:
 						facts_map[item[0]].update({
-								item[1]: [facts_map[item[0]][item[1]], item[2]] 
-								if item_in_map(item, 1, facts_map)
-								else item[2]
+							item[1]: [facts_map[item[0]][item[1]], item[2]] 
+							if item_in_map(item, 1, facts_map)
+							else item[2]
 						})
 					print(f'{item[0]}: Adicionando {item[2]} a {item[1]}!')
 			else:
 				print(f'{item[0]}: Criando {item[1]} {item[2]}!')   
 				facts_map[item[0]] = {item[1]: item[2]}
-	return dict_to_tuples(facts_map)
+	return dict_to_list_tuples(facts_map)
 
-def dict_to_tuples(dict_items):
-	tup = []
+def dict_to_list_tuples(dict_items):
+	list_items = []
 	for k, v in dict_items.items():
 		for value in v.keys():
 			if is_card_one(value, schema):
 				item = (k, value, v[value], True)
-				tup.append(item)            
+				list_items.append(item)            
 			else:
 				if (isinstance(v[value], list)):
 					for i in v[value]:
 						item = (k, value, i, True)
-						tup.append(item)
+						list_items.append(item)
 				else:
 					item = (k, value, i, True)
-					tup.append(item)
-
-	return tup
+					list_items.append(item)
+	return list_items
 
 teste = return_current_facts(schema, facts)
 print(teste)
